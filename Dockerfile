@@ -22,6 +22,6 @@ RUN pip install --upgrade pip setuptools
 # TODO: Step 4 - Install Python packages specified in requirements.txt
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 # TODO: Step 5 - Expose port 
-EXPOSE 5000
+EXPOSE 5001
 # TODO: Step 6 - Define Startup Command
 CMD ["python","app.py"]
