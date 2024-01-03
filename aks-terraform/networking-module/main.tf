@@ -1,15 +1,15 @@
 # networking-module/main.tf
 
 resource "azurerm_resource_group" "azrg" {
-  name     = var.resource_group_name.default_value
-  location = var.resource_group_name.location
+  name     = var.resource_group_name
+  location = var.location
 }
 
 resource "azurerm_virtual_network" "azvnet" {
   name                = "aks-vnet"
   location            = azurerm_resource_group.azrg.location
   resource_group_name = azurerm_resource_group.azrg.name
-  address_space       = var.vnet_address_space.default_value
+  address_space       = var.vnet_address_space
   
 }
 resource "azurerm_subnet" "control-plane-subnet" {
