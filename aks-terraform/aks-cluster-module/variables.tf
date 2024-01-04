@@ -37,23 +37,23 @@ variable "service_principal_secret" {
 variable "resource_group_name" {
     description = "The name of the resource group that will hold the networking resources"
     type = string
-    default = networking-module.networking_resource_group_name
+  
 }
 
 variable "vnet_id" {
     description = "ID of the Virtual Network (VNet)."
-    default = networking-module.vnet_id
-
+    type = string 
 }
 
 variable "control_plane_subnet_id" {
     description = "ID of the control plane subnet."
-    default = networking-module.control_plane_subnet_id
-  
+    type = string
+    
 }
 
-variable "worker_node_subnet_id {
+variable "worker_node_subnet_id" {
      description = "ID of the worker node subnet."
-     default = networking-module.worker_node_subnet_id
+     type = string
+     
   
 }
