@@ -57,3 +57,9 @@ variable "worker_node_subnet_id" {
      
   
 }
+
+variable "aks_nsg_id" {
+     description = "ID of the Network Security Group (NSG)."
+     type = string
+     
+}
