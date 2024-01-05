@@ -12,8 +12,8 @@ terraform {
 
 provider "azurerm" {
     features {}
-    client_id = "76381d54-3012-40c4-8fab-1cb463c5710d"
-    client_secret = "9L28Q~ff_hOzDRvWvG-HBiaaMLhLBvDvLHqoUarT"
+    client_id = "669b4187-8e29-406e-8782-c90ce5805a92"
+    client_secret = "a5d8Q~xBXQmdOEBIY-.8qmDylD9oIiSNFiY85bZe"
     subscription_id = "dd0193e8-693f-49c9-b1fe-4dddb252d5fd"
     tenant_id = "47321573-a048-466c-96f2-e79849a2a548"
 
@@ -37,10 +37,10 @@ module "aks_cluster" {
     dns_prefix = "myaks-project"
     kubernetes_version = "1.26.6"
     service_principal_client_id = "76381d54-3012-40c4-8fab-1cb463c5710d"
-    service_principal_secret = "9L28Q~ff_hOzDRvWvG-HBiaaMLhLBvDvLHqoUarT"
+    service_principal_client_secret = "9L28Q~ff_hOzDRvWvG-HBiaaMLhLBvDvLHqoUarT"
 
     # Input variables referencing outputs from the networking module
-    resource_group_name = module.networking.resource_group_name
+    resource_group_name = module.networking.networking_resource_group_name
     vnet_id = module.networking.vnet_id
     control_plane_subnet_id = module.networking.control_plane_subnet_id
     worker_node_subnet_id = module.networking.worker_node_subnet_id
