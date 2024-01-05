@@ -7,7 +7,7 @@ output "vnet_id" {
 
 output "control_plane_subnet_id" {
     description = "ID of the control plane subnet."
-    value = azurerm_subnet.control_node_subnet.id
+    value = azurerm_subnet.control_plane_subnet.id
 }
 
 output "worker_node_subnet_id" {
