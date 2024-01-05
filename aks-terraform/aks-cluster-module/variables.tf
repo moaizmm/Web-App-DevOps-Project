@@ -27,7 +27,7 @@ variable "service_principal_client_id" {
     type = string
 }
 
-variable "service_principal_secret" {
+variable "service_principal_client_secret" {
     description = "The Client Secret associated with the service principal used for AKS cluster authentication."
     type = string
 }
