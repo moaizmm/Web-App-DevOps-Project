@@ -1,2 +1,3 @@
 # Excludes terraform provider files.
 aksterraform/ .terraform/
+aks-terraform/terraform.tfstate
