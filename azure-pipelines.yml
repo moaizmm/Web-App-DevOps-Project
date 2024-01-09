@@ -20,7 +20,11 @@ steps:
 - task: KubernetesManifest@1
   inputs:
     action: 'deploy'
-    connectionType: 'kubernetesServiceConnection'
+    connectionType: 'azureResourceManager'
+    azureSubscriptionConnection: 'aks-service-connection'
+    azureResourceGroup: 'networking-resource-group'
+    kubernetesCluster: 'terraform-aks-cluster'
+    manifests: 'kubernetes/application-manifest.yaml'
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
