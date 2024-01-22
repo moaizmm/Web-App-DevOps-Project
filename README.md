@@ -232,13 +232,13 @@ To run the application, you simply need to run the `app.py` script in this repos
 ### Metrics Explorer
 - The first part was to enable Container Insights and create various metric charts using Metrics Explorer. The charts that were created were:
 - Average Node CPU Usage: allowed the tracking of the CPU usage of my AKS cluster's nodes. Monitoring CPU usage helps ensure efficient resource allocation and detect potential performance issues.
-![AvgCPUUsage]
+![AvgCPUUsage]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/5462edb6-4add-43d4-9149-2bdb4cc46b1e")
 - Average Number of Pods in Ready State: displays the average number of pods in a running state in my AKS cluster. It's a key metric for evaluating the cluster's capacity and workload distribution.
-![AvgPodCount]
+![AvgPodCount]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/8083c77c-4345-4ead-987c-cd4d0e520d86")
 - Used Disk Percentage: monitoring disk usage is critical to prevent storage-related issues. This chart helped me track how much disk space is being utilized.
-![AvgDiskUsed]
+![AvgDiskUsed]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/ca5bb518-cd0c-43f0-b515-c7c81fd2f857")
 - Bytes Read and Written per Second: monitoring data I/O is crucial for identifying potential performance bottlenecks. This chart provided insights into data transfer rates.
-![BytesR&W]
+![BytesR&W]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/69473ebf-30bc-4ead-9ca3-7c2f8eddcfae")
 ### Log Analytics
 - The next part of this milestone was to configure Log Analytics to execute and save the following logs:
 - Average Node CPU Usage Percentage per Minute: This configuration captured data on node-level usage at a granular level, with logs recorded per minute
