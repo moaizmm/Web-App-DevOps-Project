@@ -7,15 +7,15 @@ Welcome to the Web App DevOps Project repo! This application allows you to effic
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Technology Stack](#technology-stack)
-- [Milestone 2: Version Control](#milestone2)
-- [Milestone 3: Containerization with Docker](#milestone3)
-- [Milestone 4: Defining Networking Services with IaC](#milestone4)
-- [Milestone 5: Definining an AKS Cluster with IaC](#milestone5)
-- [Milestone 6: Creating an AKS Cluster with Iac](#milestone6)
-- [Milestone 7: Kubernetes Deployment to AKS](#milestone7)
-- [Milestone 8: CI/CD Pipeline with Azure DevOps](#milestone8)
-- [Milestone 9: AKS Cluster Monitoring](#milestone9)
-- [Milestone 10: AKS Integration with Azure Key Vault for Secrets Management](#milestone10)
+- [Milestone 2: Version Control](#milestone-2-version-control)
+- [Milestone 3: Containerization with Docker](#milestone-3-containerization-with-docker)
+- [Milestone 4: Defining Networking Services with IaC](#milestone-4-defining-networking-services-with-iac)
+- [Milestone 5: Definining an AKS Cluster with IaC](#milestone-5-defining-an-aks-cluster-with-iac)
+- [Milestone 6: Creating an AKS Cluster with Iac](#milestone-6-creating-an-aks-cluster-with-Iac)
+- [Milestone 7: Kubernetes Deployment to AKS](#milestone-7-kubernetes-deployment-to-aks)
+- [Milestone 8: CI/CD Pipeline with Azure DevOps](#milestone-8-ci/cd-pipeline-with-azure-devops)
+- [Milestone 9: AKS Cluster Monitoring](#milestone-9-aks-cluster-monitoring)
+- [Milestone 10: AKS Integration with Azure Key Vault for Secrets Management](#milestone-10-aks-integration-with-azure-key-vault-for-secrets-management)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -78,6 +78,7 @@ To run the application, you simply need to run the `app.py` script in this repos
 - **Step 7:** If need to revert, create a revert-delivery-date branch, use git log to find the latest commit hash. Revert to the commit with git revert COMMIT_HASH. Commit and push and create and merge the pull request.
 
 ## Milestone 3: Containerization with Docker
+
 ### Function
 - This milestone was used to build a new docker image, tag the image and push it to Dockerhub whilst testing the image locally by running the image locally. Dockerfile was also created to contain all the required commands needed to build the image once the application and relevant folders and files have been containerized.
 
@@ -93,10 +94,12 @@ To run the application, you simply need to run the `app.py` script in this repos
 - RUN pip install --trusted-host pypi.python.org -r requirements.txt : used to install the python packages specified in requirements.txt
 - EXPOSE 5001 : used to expose the port 5001 to make the Flask application available outside the container.
 - CMD ["python","app.py"] : used to specify the command that should be executed when the container is launched. In this project it will run the file (app.py) that starts the Flask application.
+
 #### Build Docker Image
 - The next step was to build the docker image using the docker build command. In this project the command used was (docker build -t webbuild .). 
 - The next step was to run and test the application locally to ensure the application functions correctly within the containerized environment. This was achieved through the command  (docker run -p 5001:5001 webbuild) which maps port 5001 from my local machine to the container, enabling access to the containerized application from my local development environment. This was tested on the browser via http://127.0.0.1:5000.
 - The final step was to tag and push the image to DockerHub. This was done through (docker tag webbuild moaizmm/webbuild:1.1) and (docker push moaizmm/webbuild:1.1).
+
 ## Docker Commands
 -  docker build -t <name of the image> . : this is used to build the docker image. In the case of this project the name chosen was webbuild.
 -  docker run -p 5000:5000 <name of the image> : this is used to run the image locally which can accessed via 127.0.0.1:5001.
@@ -110,13 +113,16 @@ To run the application, you simply need to run the `app.py` script in this repos
 -  docker rmi <image-id> : removes image associated with entered image ID.
 
 ## Milestone 4: Defining Networking Services with IaC
+
 ### Function
 - The first step was initialize my terraform project which was called aks-terraform. This project was then split into two Terraform modules: networking-module for provisioning an Azure Kubernetes Service (AKS) cluster using Infrastructure as Code (IAC) and the other was aks-cluster-module which was used to provision the Kubernetes cluster. This section will focus on the networking-module.
+
 ### Input Variables
 - The first step was to create a variables.tf file inside the networking-module and define the input variables. The input variables defined were:
 - resource_group_name: represents the name of Azure Resource Group where the networking resources were deployed in. This was of type string and has a default vaulue of "webapp-rg".
 - location: specifies the Azure region where the networking resources were being deployed to. This was of type string and has a default value of "UK South".
 - vnet_address space: specifies the address space for the Virtual Network (VNet). This was of type list(string) and has a default value of ["10.0.0.0/16"].
+
 ### Networking Resources and NSG Rules 
 - The next step was to define the essential networking resources for AKS cluster and this was done in a new file main.tf. The following resources that were created are:
 - Azure Resource Group: this resource defines the Azure Resource Group and the name and location are referenced by the resource_group_name and location variables created earlier.
@@ -124,6 +130,7 @@ To run the application, you simply need to run the `app.py` script in this repos
 - Control Plane Subnet: this defines a subnet within the VNet for the control plane and is provided with a name "control-plane-subnet". The resource_group_name and virtual_network_name are referenced by azurerm_resource_group.networking.name and azurerm_virtual_network.aks_vnet.name defined earlier. The address prefixes defines the address space for the subnet which is  ["10.0.1.0/24"].
 - Worker Node Subnet: this defines a subnet within the VNet for the worker node and is provided with a name "worker-node-subnet". The resource_group_name and virtual_network_name are referenced by azurerm_resource_group.networking.name and azurerm_virtual_network.aks_vnet.name defined earlier. The address prefixes defines the address space for the subnet which is  ["10.0.2.0/24"].
 - Network Security Group (NSG): this defines the NSG and is provided with the name of "aks-nsg". There are two rules (kubee-apiserver-rule) and (ssh-rule) that are defined as seperate resources but are associated with this NSG. The rules have been provided with a priority of 1001 and 1002 respectively and both focus on inbound traffic. The kube-apiserver-rule is to allow traffic to the kube-apiserver which is provided with destination port range of 443 which is the HTTPS port which is used for secure communication with the API server. The ssh-rule is provided with destination port range of 22 which is the SSH port. Both rules have the source_address_prefix set as the local IP.
+
 ### Networking Resources Module Output Variables
 - The final file created in this module is the outputs.tf which is where the output variables are defined. Output variables allow you to utilize information from the networking module. The output variables that were created are:
 - vnet_id: stores the ID of the previously created VNet. This is used within the cluster module to connect the cluster to the defined VNet. This is provided with a value of azurerm_virtual_network.aks_vnet.id.
@@ -134,8 +141,10 @@ To run the application, you simply need to run the `app.py` script in this repos
 - The final step was to initialize the networking module. Once I ensured I was in the networking=module I entered terraform init to initialize the networking-module.
 
 ## Milestone 5: Defining an AKS with IaC
+
 ### Function
 - Now the networking-module had been completed the next step was to work on the aks-cluster-module to implement the necessary resources to automate the provisioning of an AKS cluster.
+
 ### Input Variables
 - Once in the aks-cluster-module he first step was to define the cluster module input variables in variables.tf which are the following:
 - aks_cluster_name: represents the name of the AKS cluster. This has a default value of "azure_aks_cluster".
@@ -145,11 +154,13 @@ To run the application, you simply need to run the `app.py` script in this repos
 - service_principal_client_id: provides the Client ID for the service principal associated with the cluster.
 - service_principal_secret: supplies the Client Secret for the service principal.
 - Additionally output variables from networking module were passes as input variables such as resource_group_name, vnet_id, control_plane_subnet_id, and worker_node_subnet_id. All variables are of type string.
+
 ### Defining the Cluster Resources
 - The next step was to define the necessary Azure resources for provisioning an AKS cluster. This included creating the AKS cluster, speciying node pool and service principal. This was done in the main.tf file in the aks-cluster-module.
 - The aks_cluster resource incorporated the input variables defined in previous stage such as aks_cluster_name, cluster_location, dns_prefix, kubernetes_version, service_principal_client_id, service_principal_secret.
 - The next part of the resource is the default node pool which defines the default node pool of the cluster. The variables selected were name (default), node_count (sets the initial number of nodes in node pool to 1), vm_size (specifies VM size for nodes in pool - Standard_DS2_v2), enable_auto_scaling (true), min_count (sets min number of nodes to 1), max_count (sets max number of nodes to 3).
 - The final part of the reousrce s the service_principal block which provides the authentication details for the AKS cluster which takes the client_id and client_secret from the service principal.
+
 ### Defining the Cluster Module Output Variable
 - The final file created in this module is the outputs.tf which is where the output variables are defined. Output variables allow you to utilize information from the aks-cluster-module. The output variables that were created are:
 - aks_cluster_name: stores the name of the provisioned cluster. This was given a value of azurerm_kubernetes_cluster.aks_cluster.name.
@@ -157,8 +168,8 @@ To run the application, you simply need to run the `app.py` script in this repos
 - aks_kubeconfig: captures the Kubernetes configuration file of the cluster. This file is essential for interacting with and managing the AKS cluster using kubectl. This was given a value of azurerm_kubernetes_cluster.aks_cluster.kube_config_raw.
 - The final step was to initialize the aks cluster module. Once I ensured I was in the aks-cluster-module I entered terraform init to initialize the aks-cluster-module.
 
-
 ## Milestone 6: Creating an AKS Cluster with IaC
+
 ### Function
 - The function of this milestone was to complete the provisioning of AKS cluster using terraform by making use of the networking-module and aks-cluster-module to create the AKS cluster. This was created in a new main.tf file in the main project directory (aks-terraform).
 
@@ -176,7 +187,7 @@ To run the application, you simply need to run the `app.py` script in this repos
 - The next part was to input variables referencing outputs from the networking module such as resource_group_name, vnet_id, control_plane_subnet_id, worker_node_subnet_id and aks_nsg_id. 
 - Now the main configuration file was defined I reviewed the changes and planned the deployment the terraform init and terraform plan. I then applied the changes through terraform apply.
 
-## Milestone 7: Kubernetes Deployment
+## Milestone 7: Kubernetes Deployment to AKS
 
 ### Function
 - The function of this milestone was to proceed with the deployment of the containerized application to the Kubernetes cluster. This involved provisioning the essential Kubernetes manifests required for deployment.
@@ -221,13 +232,13 @@ To run the application, you simply need to run the `app.py` script in this repos
 ### Metrics Explorer
 - The first part was to enable Container Insights and create various metric charts using Metrics Explorer. The charts that were created were:
 - Average Node CPU Usage: allowed the tracking of the CPU usage of my AKS cluster's nodes. Monitoring CPU usage helps ensure efficient resource allocation and detect potential performance issues.
-
+![AvgCPUUsage]
 - Average Number of Pods in Ready State: displays the average number of pods in a running state in my AKS cluster. It's a key metric for evaluating the cluster's capacity and workload distribution.
-
+![AvgPodCount]
 - Used Disk Percentage: monitoring disk usage is critical to prevent storage-related issues. This chart helped me track how much disk space is being utilized.
-
+![AvgDiskUsed]
 - Bytes Read and Written per Second: monitoring data I/O is crucial for identifying potential performance bottlenecks. This chart provided insights into data transfer rates.
-
+![BytesR&W]
 ### Log Analytics
 - The next part of this milestone was to configure Log Analytics to execute and save the following logs:
 - Average Node CPU Usage Percentage per Minute: This configuration captured data on node-level usage at a granular level, with logs recorded per minute
@@ -267,3 +278,4 @@ The function of the final milestone was to implement a solution to securely stor
 ## License
 
 This project is licensed under the MIT License. For more details, refer to the [LICENSE](LICENSE) file.
+
