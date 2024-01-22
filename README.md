@@ -7,7 +7,7 @@ Welcome to the Web App DevOps Project repo! This application allows you to effic
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [Technology Stack](#technology-stack)
-- [Milestone 2: Version Control](#milestone-2-version-control)
+- [Milestone 2: Version Control](#milestone-2-version-control) 
 - [Milestone 3: Containerization with Docker](#milestone-3-containerization-with-docker)
 - [Milestone 4: Defining Networking Services with IaC](#milestone-4-defining-networking-services-with-iac)
 - [Milestone 5: Definining an AKS Cluster with IaC](#milestone-5-defining-an-aks-cluster-with-iac)
@@ -232,13 +232,13 @@ To run the application, you simply need to run the `app.py` script in this repos
 ### Metrics Explorer
 - The first part was to enable Container Insights and create various metric charts using Metrics Explorer. The charts that were created were:
 - Average Node CPU Usage: allowed the tracking of the CPU usage of my AKS cluster's nodes. Monitoring CPU usage helps ensure efficient resource allocation and detect potential performance issues.
-![AvgCPUUsage]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/5462edb6-4add-43d4-9149-2bdb4cc46b1e")
+![AvgCPUUsage](https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/5462edb6-4add-43d4-9149-2bdb4cc46b1e)
 - Average Number of Pods in Ready State: displays the average number of pods in a running state in my AKS cluster. It's a key metric for evaluating the cluster's capacity and workload distribution.
-![AvgPodCount]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/8083c77c-4345-4ead-987c-cd4d0e520d86")
+![AvgPodCount](https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/8083c77c-4345-4ead-987c-cd4d0e520d86)
 - Used Disk Percentage: monitoring disk usage is critical to prevent storage-related issues. This chart helped me track how much disk space is being utilized.
-![AvgDiskUsed]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/ca5bb518-cd0c-43f0-b515-c7c81fd2f857")
+![AvgDiskUsed](https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/ca5bb518-cd0c-43f0-b515-c7c81fd2f857)
 - Bytes Read and Written per Second: monitoring data I/O is crucial for identifying potential performance bottlenecks. This chart provided insights into data transfer rates.
-![BytesR&W]("https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/69473ebf-30bc-4ead-9ca3-7c2f8eddcfae")
+![BytesR&W](https://github.com/moaizmm/Web-App-DevOps-Project/assets/148896480/69473ebf-30bc-4ead-9ca3-7c2f8eddcfae)
 ### Log Analytics
 - The next part of this milestone was to configure Log Analytics to execute and save the following logs:
 - Average Node CPU Usage Percentage per Minute: This configuration captured data on node-level usage at a granular level, with logs recorded per minute
